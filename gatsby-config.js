@@ -1,3 +1,5 @@
+require("ts-node").register({ files: true });
+
 module.exports = {
   siteMetadata: {
     title: `Gatsby Default Starter`,
@@ -27,8 +29,21 @@ module.exports = {
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
+    `gatsby-plugin-typescript`,
+    {
+      resolve: `gatsby-plugin-typegen`,
+      options: {
+        target: `typescript`,
+        emitSchema: {
+          "src/__generated__/gatsby-introspection.json": true,
+        },
+        emitPluginDocuments: {
+          "src/__generated__/gatsby-plugin-documents.graphql": true,
+        },
+      },
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
   ],
-}
+};
